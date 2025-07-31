@@ -19,6 +19,13 @@ const productsSchema = mongoose.Schema ({
         type: Number,
         require: false,
         default: 1
+    },
+    estado: {
+        enum: ["pendiente", "ejecucion","finalizado" ],
+        default: "pendiente"
+    },
+    userId: {
+        type:String
     }
 }, {
     timestamps: true,
@@ -34,6 +41,7 @@ exports.productsModel = mongoose.model('producto', productsSchema)
 "nombre": "Nevera",
 "imagen": "https://images.pexels.com/photos/2962002/pexels-photo-2962002.jpeg",
 "precio": 1500000,
-"cantidad": 3
+"cantidad": 3,
+"userID": "68883541560804994209f61e"
 }
 */

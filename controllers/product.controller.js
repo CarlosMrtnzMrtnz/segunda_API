@@ -2,8 +2,10 @@ const { productsModel } = require("../models/products.model")
 
 exports.getProducts = async (req, res)=> {
     try {
+        console.log("<<<<<<contorller",req.decode);
+        
         let data = await productsModel.find()
-        res.json(data)
+        res.status(200).json(data)
     } catch (error) {
         res.json(error)
     }
@@ -24,9 +26,9 @@ exports.createProduct = async (req, res)=> {
 
         let newProduct = new productsModel(body)
         let guardado = await newProduct.save()
-        res.json(guardado)
+        res.status(201).json(guardado)
     } catch (error) {
-        res.json(error)
+        res.status(500).json(error)
     }
 }
 exports.updateProduct = async (req, res)=> {
@@ -51,8 +53,14 @@ exports.updateProduct = async (req, res)=> {
 exports.deleteProduct = async (req, res)=> {
     try {
         let id = req.params.id
+        let product = await productsModel.findById(id)
+        if (!product) {
+            return res.status(404).json({msj:"Product no found!"})
+        }
+        let deleteado = await productsModel.deleteOne({_id: id})
+        res.status(200).json({msj:"Deleato!"})
     } catch (error) {
-        res.json(error)
+        res.status(500).json(error)
     }
 }
 
