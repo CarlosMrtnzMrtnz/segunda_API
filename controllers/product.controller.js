@@ -2,14 +2,13 @@ const { productsModel } = require("../models/products.model")
 
 exports.getProducts = async (req, res)=> {
     try {
-        console.log("<<<<<<contorller",req.decode);
-        
         let data = await productsModel.find()
         res.status(200).json(data)
     } catch (error) {
-        res.json(error)
+        res.status(500).json(error)
     }
 }
+
 exports.getOneProduct = async (req, res)=> {
     try {
         let id = req.params.id
@@ -19,6 +18,7 @@ exports.getOneProduct = async (req, res)=> {
         res.json(error)
     }
 }
+
 exports.createProduct = async (req, res)=> {
     try {
         let body = req.body
@@ -31,10 +31,12 @@ exports.createProduct = async (req, res)=> {
         res.status(500).json(error)
     }
 }
+
 exports.updateProduct = async (req, res)=> {
     try {
         let id = req.params.id
         let data = req.body
+        let info = req.data
 
         let busqueda = await productsModel.findById(id)
         if (!busqueda) {
@@ -50,6 +52,7 @@ exports.updateProduct = async (req, res)=> {
         res.json(error)
     }
 }
+
 exports.deleteProduct = async (req, res)=> {
     try {
         let id = req.params.id

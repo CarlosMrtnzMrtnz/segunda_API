@@ -19,13 +19,6 @@ const productsSchema = mongoose.Schema ({
         type: Number,
         require: false,
         default: 1
-    },
-    estado: {
-        enum: ["pendiente", "ejecucion","finalizado" ],
-        default: "pendiente"
-    },
-    userId: {
-        type:String
     }
 }, {
     timestamps: true,
